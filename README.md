@@ -120,8 +120,10 @@ There are two method to use it -
 
 2. via any testing utility. - use soap ui or postman to testing the below endpoint for both the operations as per standard.
 
+
 API Interface url - 
 
 post - https://captain-xxx.appspot.com/peopleDetails?Id=2&Name=Naresh&Age=30&Blood_Group=o%2B&Gender=M&Department=IT&DOB=1989-05-29&Marital_Status=true
+
 get - https://captain-007.appspot.com/peopleDetails?Id=2
 

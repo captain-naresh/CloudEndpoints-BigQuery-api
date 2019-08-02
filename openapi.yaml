@@ -1,109 +1,127 @@
 # [START swagger]
 swagger: "2.0"
 info:
-  description: "A simple Google Cloud Endpoints API example."
-  title: "Endpoints Example"
+  description: "A simple Google Cloud Endpoints API - Connectivity with BigData."
+  title: "People Mangement system"
   version: "1.0.0"
-host: "echo-api.endpoints.YOUR-PROJECT-ID.cloud.goog"
+host: "captain-007.appspot.com"
 # [END swagger]
 consumes:
 - "application/json"
 produces:
 - "application/json"
 schemes:
-# Uncomment the next line if you configure SSL for this API.
-#- "https"
-- "http"
+- "https"
 paths:
-  "/echo":
+  "/peopleDetails":
     post:
-      description: "Echo back a given message."
-      operationId: "echo"
+      description: "Submit people Details."
+      operationId: "postpeopledetail"
       produces:
       - "application/json"
       responses:
         200:
-          description: "Echo"
-          schema:
-            $ref: "#/definitions/echoMessage"
+          description: "Data Posted"
+      security:
+      - api_key: []
       parameters:
-      - description: "Message to echo"
-        in: body
-        name: message
+      - description: "People ID"
+        in: query
+        name: Id
+        type: integer
         required: true
-        schema:
-          $ref: "#/definitions/echoMessage"
-  "/auth/info/googlejwt":
+      - description: "People Name"
+        in: query
+        name: Name
+        type: string
+        required: true
+      - description: "People Age"
+        in: query
+        name: Age
+        type: integer
+        required: true
+      - description: "People Blood_Group"
+        in: query
+        name: Blood_Group
+        type: string
+        required: true
+      - description: "People Gender"
+        in: query
+        name: Gender
+        type: string
+        required: true
+      - description: "People Department"
+        in: query
+        name: Department
+        type: string
+        required: true
+      - description: "People DOB"
+        in: query
+        name: DOB
+        type: string
+        required: true
+      - description: "People Marital_Status"
+        in: query
+        name: Marital_Status
+        type: string
+        required: true
     get:
-      description: "Returns the requests' authentication information."
-      operationId: "auth_info_google_jwt"
+      description: "Returns the people details"
+      operationId: "getpeopledetail"
       produces:
       - "application/json"
       responses:
         200:
-          description: "Authenication info."
+          description: "People info."
           schema:
-            $ref: "#/definitions/authInfoResponse"
+            $ref: "#/definitions/PeopleDetails"
+      parameters:
+      - description: "People ID"
+        in: query
+        name: Id
+        type: integer
+        required: true
       security:
-      - google_jwt: []
-  "/auth/info/googleidtoken":
-    get:
-      description: "Returns the requests' authentication information."
-      operationId: "authInfoGoogleIdToken"
-      produces:
-      - "application/json"
-      responses:
-        200:
-          description: "Authenication info."
-          schema:
-            $ref: "#/definitions/authInfoResponse"
-      security:
-      - google_id_token: []
-definitions:
-  echoMessage:
-    type: "object"
-    properties:
-      message:
-        type: "string"
-  authInfoResponse:
-    properties:
-      id:
-        type: "string"
-      email:
-        type: "string"
-# This section requires all requests to any path to require an API key.
-security:
-- api_key: []
+      - api_key: []
 securityDefinitions:
-  # This section configures basic authentication with an API key.
   api_key:
-    type: "apiKey"
-    name: "key"
+    type: apiKey
+    name: api_key
     in: "query"
-  # This section configures authentication using Google API Service Accounts
-  # to sign a json web token. This is mostly used for server-to-server
-  # communication.
-  google_jwt:
-    authorizationUrl: ""
-    flow: "implicit"
-    type: "oauth2"
-    # This must match the 'iss' field in the JWT.
-    x-google-issuer: "jwt-client.endpoints.sample.google.com"
-    # Update this with your service account's email address.
-    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/jwk/YOUR-SERVICE-ACCOUNT-EMAIL"
-    # This must match the "aud" field in the JWT. You can add multiple
-    # audiences to accept JWTs from multiple clients.
-    x-google-audiences: "echo.endpoints.sample.google.com"
-  # This section configures authentication using Google OAuth2 ID Tokens.
-  # ID Tokens can be obtained using OAuth2 clients, and can be used to access
-  # your API on behalf of a particular user.
-  google_id_token:
-    authorizationUrl: ""
-    flow: "implicit"
-    type: "oauth2"
-    x-google-issuer: "https://accounts.google.com"
-    x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
-    # Your OAuth2 client's Client ID must be added here. You can add
-    # multiple client IDs to accept tokens from multiple clients.
-    x-google-audiences: "YOUR-CLIENT-ID"
-
+definitions:
+  PeopleDetails:
+    properties:
+      Id:
+        type: "integer"
+        format: "int32"
+        example: "5"
+      Name:
+        type: "string"
+        format: "string"
+        example: "BoB"
+      Age:
+        type: "integer"
+        format: "int32"
+        minimum: 1
+        maximum: 100
+        example: "99"
+      Blood_Group:
+        type: "string"
+        format: "string"
+        example: "A+"
+      Gender:
+        type: "string"
+        format: "string"
+        example: "M or F or Others"
+      Department:
+        type: "string"
+        format: "string"
+        example: "IT"
+      DOB:
+        type: "string"
+        format: "string"
+        example: "DD-MM-YYYY"
+      Marital_Status:
+        type: "string"
+        format: "string"
+        example: "yes or No"

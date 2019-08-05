@@ -22,6 +22,8 @@ paths:
       responses:
         200:
           description: "Data Posted"
+      security:
+      - api_key: []
       parameters:
       - description: "People ID"
         in: query
@@ -79,6 +81,13 @@ paths:
         name: Id
         type: integer
         required: true
+      security:
+      - api_key: []
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: "query"
 definitions:
   PeopleDetails:
     properties:

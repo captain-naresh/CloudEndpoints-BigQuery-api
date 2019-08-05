@@ -49,16 +49,17 @@ async function insertRowsAsStream() {
  console.log(rows);
 
     // Insert data into a table
- const table = bigqueryClient.dataset(datasetId).table(tableId);
- table.insert(rows).then(function(data) {
-    var apiResponse = data[0];
-  });
- 
+    try{
+ await bigqueryClient.dataset(datasetId).table(tableId).insert(rows);
  console.log(`Inserted ${rows.length} rows`);
+ res.status(200).set('Content-Type', 'application/json').json(rows);
+     } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+    return Promise.reject(err);
+  }
  
- res.status(200).set('Content-Type', 'application/json').json(rows).end();
-
-
+ 
 }
     // [END bigquery_table_insert_rows]
   insertRowsAsStream();

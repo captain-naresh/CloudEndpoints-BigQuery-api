@@ -11,7 +11,7 @@ This service given an Swagger 2.0 endpoint interface to manage people data in Go
 
 Service is hosted at URL = https://captain-xxx.appspot.com/
 
-It is developed in NodeJS10 and is deployed on Google App Engine Standard.
+It is developed in NodeJS10 and is deployed on Google App Engine Flexible env.
 
 The service offers following two functionalities thru the Swagger APIs-
 
